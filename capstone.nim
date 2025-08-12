@@ -1,4 +1,3 @@
-# capstone.nim - Nim bindings for Capstone Engine
 {.pragma: cs, dynlib: "libcapstone".}
 
 type

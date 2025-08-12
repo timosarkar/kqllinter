@@ -6,5 +6,5 @@ cmake .. -DCMAKE_BUILD_TYPE=Release -DCAPSTONE_BUILD_SHARED_LIBS=ON
 make -j
 sudo make install -j
 cd ..
-nim c --passL:"-L/usr/local/lib -lcapstone -Wl,-rpath,/usr/local/lib" -r example.nim
+nim c --passL:"-L/usr/local/lib -lcapstone -Wl,-rpath,/usr/local/lib" -r main.nim
 

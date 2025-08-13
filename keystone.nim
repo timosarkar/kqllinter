@@ -1,10 +1,13 @@
-import strutils
-
 when defined(windows):
-  const libname = "keystone.dll"
+  const libkeystone* = "keystone.dll"
+elif defined(linux):
+  const libkeystone* = "libkeystone"
+elif defined(macosx):  # Nim uses "macosx" for macOS
+  const libkeystone* = "libkeystone.dylib"
 else:
-  const libname = "libkeystone.so"
-{.pragma: ks, cdecl, importc, dynlib: libname.}
+  {.error: "Unsupported platform".}
+{.pragma: ks, cdecl, importc, dynlib: libkeystone.}
+import strutils
 
 type
 

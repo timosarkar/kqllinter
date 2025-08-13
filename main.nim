@@ -1,6 +1,6 @@
 import strformat
-import capstone
-import keystone
+import "capstone"
+import "keystone"
 
 proc assemble() =
   let engine = newX86Engine()

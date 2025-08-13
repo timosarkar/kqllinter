@@ -67,8 +67,7 @@ type
 # Import functions with correct signatures from header
 proc cs_open*(arch: cs_arch, mode: cs_mode, handle: ptr csh): cs_err {.importc, header: "<capstone/capstone.h>".}
 proc cs_close*(handle: ptr csh): cs_err {.importc, header: "<capstone/capstone.h>".}
-proc cs_disasm*(handle: csh, code: ptr uint8, code_size: csize_t, 
-                address: uint64, count: csize_t, insn: ptr ptr cs_insn): csize_t {.importc, header: "<capstone/capstone.h>".}
+proc cs_disasm*(handle: csh, code: ptr uint8, code_size: csize_t, address: uint64, count: csize_t, insn: ptr ptr cs_insn): csize_t {.importc, header: "<capstone/capstone.h>".}
 proc cs_free*(insn: ptr cs_insn, count: csize_t) {.importc, header: "<capstone/capstone.h>".}
 proc cs_errno*(handle: csh): cs_err {.importc, header: "<capstone/capstone.h>".}
 proc cs_strerror*(code: cs_err): cstring {.importc, header: "<capstone/capstone.h>".}

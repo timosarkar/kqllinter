@@ -11,9 +11,6 @@ proc assemble() =
 proc disassemble() =
   var handle: csh
   let err = cs_open(CS_ARCH_X86, CS_MODE_64, addr handle)
-  if err != CS_ERR_OK:
-    quit("Failed to initialize Capstone: " & $cs_strerror(err))
-
   let code: array[6, uint8] = [0xb8u8, 0x01, 0x00, 0x00, 0x00, 0xc3]
   let address: uint64 = 0x1000
   var insn: ptr cs_insn

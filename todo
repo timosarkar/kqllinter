@@ -1,0 +1,11 @@
+☐ send and receive commands from teamserver
+☐ http listener
+☐ https listener
+☐ dns listener
+
+simple ones:
+  ☐ nimprotect
+  ☐ bof / coff loader
+  ☐ sleep masking and jitter
+  ☐ nimless nim
+  ☐ rust teamserver

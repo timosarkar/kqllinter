@@ -1,1 +1,0 @@
-# nim c --opt:speed -r uuid.nim

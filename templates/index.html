@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+    <title>Python Chess</title>
+    <style>
+        table { border-collapse: collapse; }
+        td { width: 50px; height: 50px; text-align: center; vertical-align: middle; font-size: 24px; }
+        .coord { font-size: 14px; text-align: center; }
+        .error-message {
+        background-color: #ffe5e5; /* Soft pink background */
+        color: #b00020;           /* Dark red text */
+        padding: 5px 8px;       /* Comfortable padding */
+        font-weight: bold;        /* Emphasize text */
+        margin-bottom: 15px;      /* Spacing from other elements */
+        display: inline-block;
+        font-family: Arial, sans-serif;
+    }
+        /* Themes */
+        .brown-light { background-color: #f0d9b5; }
+        .brown-dark  { background-color: #b58863; color: black; }
+        .blue-light  { background-color: #dee3e6; }
+        .blue-dark   { background-color: #8ca2ad; color: black; }
+        .matcha-light { background-color: #ececec; }
+        .matcha-dark  { background-color: #c1c18f; color: black; }
+        .green-light  { background-color: #ffffdd; }
+        .green-dark   { background-color: #85a666; color: black; }
+    </style>
+</head>
+<body>
+    <h1>Python Chess</h1>
+    {{ msg|safe }}
+
+    <!-- Theme selector -->
+    <label for="theme">Select Theme:</label>
+    <select id="theme">
+        <option value="brown">Brown</option>
+        <option value="blue">Blue</option>
+        <option value="matcha">Matcha</option>
+        <option value="green">Green</option>
+    </select>
+
+    <!-- Move form -->
+    <form method="post">
+        Move (e.g., e2e4): <input type="text" name="move">
+        <button type="submit">Submit Move</button>
+    </form>
+
+    {% set files = ['a','b','c','d','e','f','g','h'] %}
+
+    <table id="chessboard">
+        <!-- Top file labels -->
+        <tr>
+            <td></td>
+            {% for f in files %}
+            <td class="coord">{{ f }}</td>
+            {% endfor %}
+        </tr>
+
+        {% for row in range(8,0,-1) %}
+        <tr>
+            <!-- Row number -->
+            <td class="coord">{{ row }}</td>
+            {% for col in range(1,9) %}
+            {% set piece = board.get((row,col)) %}
+            <td data-row="{{ row }}" data-col="{{ col }}">
+                {% if piece %}
+                    {{ piece.__class__.__name__[0].upper() if piece.color=='white' else piece.__class__.__name__[0].lower() }}
+                {% endif %}
+            </td>
+            {% endfor %}
+            <!-- Row number on right -->
+            <td class="coord">{{ row }}</td>
+        </tr>
+        {% endfor %}
+
+        <!-- Bottom file labels -->
+        <tr>
+            <td></td>
+            {% for f in files %}
+            <td class="coord">{{ f }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    <script>
+        function applyTheme(theme) {
+            const board = document.querySelector('#chessboard');
+            const cells = board.querySelectorAll('td[data-row][data-col]');
+
+            cells.forEach(cell => {
+                const row = parseInt(cell.dataset.row);
+                const col = parseInt(cell.dataset.col);
+                const isLight = (row + col) % 2 === 0;
+
+                // Remove old theme classes
+                cell.className = '';
+
+                // Add new theme class
+                let cls = '';
+                switch(theme) {
+                    case 'brown': cls = isLight ? 'brown-light' : 'brown-dark'; break;
+                    case 'blue': cls = isLight ? 'blue-light' : 'blue-dark'; break;
+                    case 'matcha': cls = isLight ? 'matcha-light' : 'matcha-dark'; break;
+                    case 'green': cls = isLight ? 'green-light' : 'green-dark'; break;
+                    default: cls = isLight ? 'matcha-light' : 'matcha-dark';
+                }
+                cell.classList.add(cls);
+            });
+        }
+
+        // Initial theme
+        let themeSelect = document.getElementById('theme');
+        applyTheme(themeSelect.value);
+
+        themeSelect.addEventListener('change', () => {
+            applyTheme(themeSelect.value);
+        });
+    </script>
+</body>
+</html>

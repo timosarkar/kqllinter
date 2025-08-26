@@ -1,5 +1,5 @@
 from board import initial_board
-from pieces import King
+from board import King
 
 class Game:
     def __init__(self):

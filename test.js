@@ -1,1 +1,0 @@
-let ws = new WebSocket("ws://localhost:9001/ws"); ws.onopen = () => { console.log("Connected!"); ws.send("Hello from browser!"); // Send AFTER the connection is open }; ws.onmessage = msg => console.log("Received:", msg.data); msg => console.log("Received:", msg.data)

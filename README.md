@@ -13,7 +13,7 @@ dotnet run --project src/Kusto.Language
 
 ## Naming
 
-```okayql``` is called like this because if you pronounce it as Oohh Kay-QL it is actually just Oohh KQL :)
+The name ```okayql``` is a playful nod to how it's pronounced: "Oh-Kay-Q-L". Say it out loud, and you'll hear "OK KQL". A fitting name for a tool that helps ensure your KQL is clean, correct, and ready to go
 
 ## Microsoft Open Source Code of Conduct
 

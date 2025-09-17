@@ -9,6 +9,8 @@ class Program
 {
     static void Main()
     {
+        // you would need to predefine all tables as used in Microsoft Sentinel and Microsoft Defender XDR Advanced Hunting alongside all of their table schemas.
+        // working on a better way. but for now it is what it is...
 var globals = GlobalState.Default.WithDatabase(
     new DatabaseSymbol("Sentinel",
         new TableSymbol("SigninLogs", "(TimeGenerated: datetime, UserPrincipalName: string, LocationDetails: dynamic, RiskLevelDuringSignIn: string)"),
@@ -55,3 +57,4 @@ var code = KustoCode.ParseAndAnalyze(query, globals);
         return (-1, -1); // fallback
     }
 }
+

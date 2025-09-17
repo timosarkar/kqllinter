@@ -8,6 +8,27 @@ To build okayql from sources you will need at least the .NET core SDK v8.0.413. 
 
 ```bash
 dotnet build src/Kusto.Language/Kusto.Language.csproj
+```
+
+## Usage
+
+To run okayql, you first need to pull the list of tables and their schemas from Microsoft Sentinel or Defender Advanced Hunting. You can do that by following the steps:
+
+```bash
+python3 -m pip install azure-identity azure-monitor-query --break-system-packages
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+az login --use-device-code
+```
+
+Once you are authenticated you must follow the steps in schemaindexer.py and then run the script using 
+
+```bash
+python3 schemaindexer.py
+```
+
+This will produce a json file with all Tables alongside schema which we will inject into okayql for linting purposed. To start the linter please run
+
+```bash
 dotnet run --project src/Kusto.Language
 ```
 
